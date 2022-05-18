@@ -1,0 +1,95 @@
+FUNCTION prodScalaire(n: INTEGER,v1,v2: ARRAY_OF INTEGER) : INTEGER
+VAR
+    
+    pscal, i: INTEGER:=0;
+
+BEGIN
+    FOR i FROM 0 TO n-1 STEP 1  DO
+        pscal+:= v1[i]*v2[i];
+    END_FOR
+    RETURN pscal ;
+END
+
+FUNCTION taille() : integer
+VAR
+    n:integer;
+BEGIN
+    
+    REPEAT
+        read(n);
+    UNTIL (n>=1)
+    RETURN n ;
+END
+
+PROCEDURE contenu(n: integer,vec: ARRAY_OF integer)
+VAR
+    i: integer:=0;
+BEGIN   
+    FOR i FROM 0 TO n-1 STEP 1  DO
+        read(vec[i]);
+    END_FOR
+END
+ALGORITHM vecteur
+VAR
+    vecteur1, vecteur2: ARRAY_OF INTEGER;
+    prod, n : INTEGER;
+
+BEGIN
+    n:=taille();
+    contenu(n, vecteur1);
+    contenu(n, vecteur2);
+    prod:=prodScalaire(n , vecteur1, vecteur2);
+    IF (prod==0) THEN
+        write("les deux vecteurs sont orthogonaux");
+    END_IF
+END
+
+
+// solution 2 : by reference
+
+
+PROCEDURE prodScalaire(n: INTEGER, VAR v1,v2: ARRAY_OF INTEGER) : INTEGER
+VAR
+    
+    pscal, i: INTEGER:=0;
+
+BEGIN
+    FOR i FROM 0 TO n-1 STEP 1  DO
+        pscal+:= v1[i]*v2[i];
+    END_FOR
+    IF (pscal==0) THEN
+        write("les deux vecteurs sont orthogonaux");
+    END_IF
+    write(pscal);
+END
+
+FUNCTION taille() : integer
+VAR
+    n:integer;
+BEGIN
+    
+    REPEAT
+        read(n);
+    UNTIL (n>=1)
+    RETURN n ;
+END
+
+PROCEDURE contenu(n: integer,vec: ARRAY_OF integer)
+VAR
+    i: integer:=0;
+BEGIN   
+    FOR i FROM 0 TO n-1 STEP 1  DO
+        read(vec[i]);
+    END_FOR
+END
+ALGORITHM vecteur
+VAR
+    vecteur1, vecteur2: ARRAY_OF INTEGER;
+    prod, n : INTEGER;
+
+BEGIN
+    n:=taille();
+    contenu(n, vecteur1);
+    contenu(n, vecteur2);
+    prod:=prodScalaire(n ,VAR vecteur1, vecteur2);
+END
